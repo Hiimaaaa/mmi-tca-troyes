@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - "ressources/s5/sebastien-va/projets/ci-cd-symfony/**"
+      - ".github/**"
 
 defaults:
   run:

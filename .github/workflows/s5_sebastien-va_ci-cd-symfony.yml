@@ -62,6 +62,9 @@ jobs:
   deploy-to-server:
     needs: ci-symfony
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .  # 👈 Correction minimale : exécuter depuis la racine
 
     steps:
       - name: Download Symfony artifact

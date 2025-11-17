@@ -28,6 +28,14 @@ jobs:
       - name: Install dependencies
         run: composer install --no-progress --prefer-dist --no-scripts
 
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 23
+
+      - name: Install dependencies
+        run: npm install
+
       - name: Run PHP-CS-Fixer
         run: ./vendor/bin/php-cs-fixer fix --dry-run --diff
 
@@ -39,6 +47,9 @@ jobs:
 
       - name: Run PHPUnit
         run: ./vendor/bin/phpunit --coverage-text --coverage-clover=coverage.xml
+
+      - name: Run Cypress tests
+        run: npx cypress run
 
       - name: Audit de sécurité
         run: composer audit --format=json --no-interaction
@@ -64,7 +75,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: .  # 👈 Correction minimale : exécuter depuis la racine
+        working-directory: .
 
     steps:
       - name: Download Symfony artifact
